@@ -1,32 +1,38 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import RouterProvider, { useRouter } from "./Router";
-import "/index.css";
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import RouterProvider, { useRouter } from './Router'
+import BackendProvider from './Backend'
+import '/index.css'
 
-import Home from "./Home";
-import Explore from "./Explore";
+import Home from './Home'
+import Explore from './Explore'
+import AI from './AI'
 
 const App = () => {
-  const { currentPage } = useRouter();
+	const { currentPage } = useRouter()
 
-  const renderPage = () => {
-    switch (currentPage) {
-      case "/":
-        return <Home />;
-      case "/explore":
-        return <Explore />;
-    }
-  };
+	const renderPage = () => {
+		switch (currentPage) {
+			case '/':
+				return <Home />
+			case '/ai':
+				return <AI />
+			case '/explore':
+				return <Explore />
+		}
+	}
 
-  return <main>{renderPage()}</main>;
-};
+	return <main>{renderPage()}</main>
+}
 
-export default App;
+export default App
 
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <RouterProvider>
-      <App />
-    </RouterProvider>
-  </React.StrictMode>,
-);
+ReactDOM.createRoot(document.getElementById('root')).render(
+	<React.StrictMode>
+		<RouterProvider>
+			<BackendProvider>
+				<App />
+			</BackendProvider>
+		</RouterProvider>
+	</React.StrictMode>
+)

@@ -24,13 +24,7 @@ sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 
 2. [Install NodeJS](https://nodejs.org/en/download/package-manager).
 
-3. For Rust projects, you will also need to:
-
-- Install [Rust](https://doc.rust-lang.org/cargo/getting-started/installation.html#install-rust-and-cargo): `curl https://sh.rustup.rs -sSf | sh`
-
-- Install [candid-extractor](https://crates.io/crates/candid-extractor): `cargo install candid-extractor`
-
-4. For Motoko projects, you will also need to:
+3. For Motoko projects, you will also need to:
 
 - Install the Motoko package manager [Mops](https://docs.mops.one/quick-start#2-install-mops-cli): `npm i -g ic-mops`
 
@@ -52,29 +46,24 @@ To create a new identity, run the commands:
 
 ```
 
-dfx start --background
+dfx start --clean --background
 
-dfx identity new IDENTITY_NAME
+dfx identity new dev
 
-dfx identity use IDENTITY_NAME
+dfx identity use dev
 
 ```
-
-Replace `IDENTITY_NAME` with your preferred identity name. The first command `dfx start --background` starts the local `dfx` processes, then `dfx identity new` will create a new identity and return your identity's seed phase. Be sure to save this in a safe, secure location.
-
-The third command `dfx identity use` will tell `dfx` to use your new identity as the active identity. Any canister smart contracts created after running `dfx identity use` will be owned and controlled by the active identity.
-
-Your identity will have a principal ID associated with it. Principal IDs are used to identify different entities on ICP, such as users and canisters.
 
 [Learn more about ICP developer identities](https://internetcomputer.org/docs/building-apps/getting-started/identities).
 
-### 3. Deploy the project locally.
+### 3. Deploy the project to ICP playground.
 
-Deploy your project to your local developer environment with:
+Deploy your project to ICP playground and test it locally:
 
 ```
-npm install
-dfx deploy
+npm run prebuild
+dfx deploy --playground
+npm run dev
 
 ```
 
