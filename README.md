@@ -1,6 +1,15 @@
 # 🚀 Hacktrilize
 
-## How to Run Locally
+## 🤝 How to Contribute
+1. Fork the repository
+2. Clone the repository
+3. Create a new branch
+4. Make your changes
+5. Push your changes
+6. Create a pull request
+7. Wait for the pull request to be reviewed
+
+## 💻 How to Run Locally
 > For windows, run the following commands in WSL2
 
 ### 1. Install `dfx` with the following command:
