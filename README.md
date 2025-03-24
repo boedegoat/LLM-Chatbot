@@ -26,7 +26,7 @@ sh -ci "$(curl -fsSL https://internetcomputer.org/install.sh)"
 
 - Install the Motoko package manager [Mops](https://docs.mops.one/quick-start#2-install-mops-cli): `npm i -g ic-mops`
 
-### 2. Run the following commands to setup, dpeloy to ICP playground, and start the project
+### 2. Run the following commands to setup, deploy to ICP playground, and start the project
 
 ```bash
 chmod +x setup.sh
