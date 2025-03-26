@@ -11,6 +11,7 @@ import User from "/user.svg"
 import Users from "/users.svg"
 import LogOut from "/logout.svg"
 import { useRouter } from "./Router"
+import { useBackend } from './Backend'
 
 const user = {
   name : "Sandi",
@@ -24,6 +25,7 @@ const logout = () =>{
 }
 
 export default function Navbar() {
+  const { login, logout, isAuthenticated, principal } = useBackend()
   const { navigate } = useRouter()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const pathname = location.pathname
@@ -88,7 +90,7 @@ export default function Navbar() {
                   </Avatar>
             </Button>
           ) : (
-            <Button asChild className="gap-2">
+            <Button onClick ={() => login()} asChild className="gap-2">
               <Link href="/login">
                 <LogIn className="h-4 w-4" />
                 Connect
@@ -147,7 +149,7 @@ export default function Navbar() {
                     </Avatar>
                     <span className="text-sm font-medium">{user.name}</span>
                   </div>
-                  <Button variant="ghost" size="sm" onClick={logout}>
+                  <Button onClick={() => logout()} variant="ghost" size="sm">
                     Log out
                   </Button>
                 </div>
