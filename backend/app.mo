@@ -18,11 +18,19 @@ actor Hacktrilize {
     usersEntries := [];
   };
 
+  public shared (msg) func getUser() : async Result.Result<User.User, Text> {
+    return User.getUser(users, msg.caller);
+  };
+
   public shared (msg) func register(username : Text) : async Result.Result<User.User, Text> {
     return User.register(users, msg.caller, username);
   };
 
-  public shared (msg) func login() : async Result.Result<User.User, Text> {
-    return User.login(users, msg.caller);
+  public shared (msg) func editProfile(data : User.EditProfileData) : async Result.Result<User.User, Text> {
+    return User.editProfile(users, msg.caller, data);
+  };
+
+  public shared (msg) func toggleFollow(targetUserId : Principal) : async Result.Result<Text, Text> {
+    return User.toggleFollow(users, msg.caller, targetUserId);
   };
 };
