@@ -15,6 +15,7 @@ import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
 import HackathonPage from './HackathonPage'
 import CreateHackathonPage from './CreateHackathon'
+import ProfilePage from './profile'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -41,6 +42,8 @@ const App = () => {
 				return <WalletManagerPage/>
 			case '/create':
 				return <CreateHackathonPage/>
+			case '/profile':
+				return <ProfilePage/>
 			default:
 				return <NotFound />
 		}
