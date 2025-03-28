@@ -8,6 +8,7 @@ import NotFound from './NotFound'
 import Home from './Home'
 import Explore from './Explore'
 import AI from './AI'
+import HackathonPage from './HackathonPage'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -20,6 +21,8 @@ const App = () => {
 				return <AI />
 			case '/explore':
 				return <Explore />
+			case '/explore/1':
+				return <HackathonPage/>
 			default:
 				return <NotFound />
 		}

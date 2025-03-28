@@ -17,5 +17,5 @@ const Input = forwardRef(({ className, type, ...props }, ref) => {
   });
 Input.displayName = "Input"
 
-export default Input 
+export default Input;
 
