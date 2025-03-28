@@ -16,6 +16,8 @@ import WalletManagerPage from './Create-Wallet'
 import HackathonPage from './HackathonPage'
 import CreateHackathonPage from './CreateHackathon'
 import ProfilePage from './profile'
+import Footer from './Footer'
+import Navbar from './Navbar'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -28,16 +30,16 @@ const App = () => {
 				return <AI />
 			case '/explore':
 				return <Explore />
-      		case '/explore/1':
-				return <HackathonPage/>
+			case '/explore/1':
+				return <HackathonPage />
 			case '/tools':
-				return <ToolsPage/>
+				return <ToolsPage />
 			case '/idea-generator':
-				return <IdeaGeneratorPage/>
+				return <IdeaGeneratorPage />
 			case '/team-finder':
-				return <TeamFinderPage/>
+				return <TeamFinderPage />
 			case '/code-templates':
-				return <CodeTemplatesPage/>
+				return <CodeTemplatesPage />
 			case '/create-wallet':
 				return <WalletManagerPage/>
 			case '/create':
@@ -49,7 +51,13 @@ const App = () => {
 		}
 	}
 
-	return <main>{renderPage()}</main>
+	return (
+		<main>
+			<Navbar />
+			{renderPage()}
+			<Footer />
+		</main>
+	)
 }
 
 export default App

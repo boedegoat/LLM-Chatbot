@@ -7,7 +7,7 @@ const BackendContext = createContext({})
 
 const network = process.env.DFX_NETWORK
 const identityProvider =
-	network === 'ic'
+	network !== 'ic'
 		? 'https://identity.ic0.app' // Mainnet
 		: 'http://rdmx6-jaaaa-aaaaa-aaadq-cai.localhost:4943' // Local
 
@@ -28,6 +28,7 @@ const BackendProvider = ({ children }) => {
 		const actor = createActor(canisterId, {
 			agentOptions: {
 				identity,
+				host: 'https://icp0.io',
 			},
 		})
 		const isAuthenticated = await authClient.isAuthenticated()
