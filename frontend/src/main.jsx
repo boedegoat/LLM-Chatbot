@@ -13,6 +13,7 @@ import IdeaGeneratorPage from './Idea-generator'
 import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
+import CommunityPage from './Community'
 import HackathonPage from './HackathonPage'
 import CreateHackathonPage from './CreateHackathon'
 import ProfilePage from './profile'
@@ -42,6 +43,8 @@ const App = () => {
 				return <CodeTemplatesPage />
 			case '/create-wallet':
 				return <WalletManagerPage/>
+			case '/community':
+				return <CommunityPage/>
 			case '/create':
 				return <CreateHackathonPage/>
 			case '/profile':
