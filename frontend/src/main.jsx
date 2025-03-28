@@ -14,6 +14,8 @@ import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
 import HackathonPage from './HackathonPage'
+import CreateHackathonPage from './CreateHackathon'
+import ProfilePage from './profile'
 import Footer from './Footer'
 import Navbar from './Navbar'
 
@@ -39,7 +41,11 @@ const App = () => {
 			case '/code-templates':
 				return <CodeTemplatesPage />
 			case '/create-wallet':
-				return <WalletManagerPage />
+				return <WalletManagerPage/>
+			case '/create':
+				return <CreateHackathonPage/>
+			case '/profile':
+				return <ProfilePage/>
 			default:
 				return <NotFound />
 		}
