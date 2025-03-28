@@ -4,6 +4,7 @@ import RouterProvider, { useRouter } from './Router'
 import BackendProvider from './Backend'
 import '/index.css'
 
+import NotFound from './NotFound'
 import Home from './Home'
 import Explore from './Explore'
 import AI from './AI'
@@ -22,6 +23,8 @@ const App = () => {
 				return <Explore />
 			case '/explore/1':
 				return <HackathonPage/>
+			default:
+				return <NotFound />
 		}
 	}
 
