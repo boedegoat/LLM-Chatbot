@@ -4,6 +4,7 @@ import RouterProvider, { useRouter } from './Router'
 import BackendProvider from './Backend'
 import '/index.css'
 
+import NotFound from './NotFound'
 import Home from './Home'
 import Explore from './Explore'
 import AI from './AI'
@@ -13,6 +14,11 @@ import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
 import CommunityPage from './Community'
+import HackathonPage from './HackathonPage'
+import CreateHackathonPage from './CreateHackathon'
+import ProfilePage from './profile'
+import Footer from './Footer'
+import Navbar from './Navbar'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -25,22 +31,36 @@ const App = () => {
 				return <AI />
 			case '/explore':
 				return <Explore />
-			case '/Tools':
-				return <ToolsPage/>
-			case '/Idea-generator':
-				return <IdeaGeneratorPage/>
-			case '/Team-finder':
-				return <TeamFinderPage/>
-			case '/Code-Templates':
-				return <CodeTemplatesPage/>
-			case '/Create-Wallet':
+			case '/explore/1':
+				return <HackathonPage />
+			case '/tools':
+				return <ToolsPage />
+			case '/idea-generator':
+				return <IdeaGeneratorPage />
+			case '/team-finder':
+				return <TeamFinderPage />
+			case '/code-templates':
+				return <CodeTemplatesPage />
+			case '/create-wallet':
 				return <WalletManagerPage/>
-			case '/Community':
+			case '/community':
 				return <CommunityPage/>
+			case '/create':
+				return <CreateHackathonPage/>
+			case '/profile':
+				return <ProfilePage/>
+			default:
+				return <NotFound />
 		}
 	}
 
-	return <main>{renderPage()}</main>
+	return (
+		<main>
+			<Navbar />
+			{renderPage()}
+			<Footer />
+		</main>
+	)
 }
 
 export default App
