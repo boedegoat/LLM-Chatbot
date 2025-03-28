@@ -4,6 +4,7 @@ import RouterProvider, { useRouter } from './Router'
 import BackendProvider from './Backend'
 import '/index.css'
 
+import NotFound from './NotFound'
 import Home from './Home'
 import Explore from './Explore'
 import AI from './AI'
@@ -12,6 +13,7 @@ import IdeaGeneratorPage from './Idea-generator'
 import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
+import HackathonPage from './HackathonPage'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -24,16 +26,20 @@ const App = () => {
 				return <AI />
 			case '/explore':
 				return <Explore />
-			case '/Tools':
+      case '/explore/1':
+				return <HackathonPage/>
+			case '/tools':
 				return <ToolsPage/>
-			case '/Idea-generator':
+			case '/idea-generator':
 				return <IdeaGeneratorPage/>
-			case '/Team-finder':
+			case '/team-finder':
 				return <TeamFinderPage/>
-			case '/Code-Templates':
+			case '/code-templates':
 				return <CodeTemplatesPage/>
-			case '/Create-Wallet':
+			case '/create-wallet':
 				return <WalletManagerPage/>
+			default:
+				return <NotFound />
 		}
 	}
 

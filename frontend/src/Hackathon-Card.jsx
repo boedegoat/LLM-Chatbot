@@ -68,7 +68,7 @@ export default function HackathonCard({ hackathon }) {
           )}
         </div>
         <Button size="sm" variant="ghost" asChild>
-          <Link href={`/hackathons/${hackathon.id}`} className="gap-1">
+          <Link href={`/explore/1`} className="gap-1">
             View Details
             <img src="arrowright.svg" className="h-4 w-4"/> 
           </Link>
