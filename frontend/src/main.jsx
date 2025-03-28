@@ -12,6 +12,7 @@ import IdeaGeneratorPage from './Idea-generator'
 import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
+import CommunityPage from './Community'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -34,6 +35,8 @@ const App = () => {
 				return <CodeTemplatesPage/>
 			case '/Create-Wallet':
 				return <WalletManagerPage/>
+			case '/Community':
+				return <CommunityPage/>
 		}
 	}
 

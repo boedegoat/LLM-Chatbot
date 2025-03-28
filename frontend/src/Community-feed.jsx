@@ -1,9 +1,10 @@
+"use client"
+
 import { Button } from "./Button"
 import { Card, CardContent, CardFooter } from "./Card"
 import { Textarea } from "./Text-Area"
 import { Avatar, AvatarFallback, AvatarImage } from "./Avatar"
 import { Badge } from "./Badge"
-// import { Heart, MessageSquare, Share2, Image, Hash, Send } from "lucide-react"
 import { useState } from "react"
 import Link from "./Link"
 
@@ -11,18 +12,8 @@ export default function CommunityFeed() {
   const [newPost, setNewPost] = useState("")
   const [isSubmitting, setIsSubmitting] = useState(false)
 
-  const handleSubmit = () => {
-    if (!newPost.trim()) return
-
-    setIsSubmitting(true)
-    // Simulate post submission - in a real app, this would call an API
-    setTimeout(() => {
-      setNewPost("")
-      setIsSubmitting(false)
-    }, 1000)
-  }
-
-  const posts = [
+  // Initialize with the existing posts
+  const [posts, setPosts] = useState([
     {
       id: "post1",
       user: {
@@ -34,6 +25,7 @@ export default function CommunityFeed() {
       content:
         "Just registered for the DeFi Summit 2025! Looking for team members with experience in Solidity and React. DM me if you're interested in collaborating!",
       likes: 24,
+      liked: false,
       comments: 8,
       timestamp: "2 hours ago",
       hackathon: {
@@ -52,6 +44,7 @@ export default function CommunityFeed() {
       content:
         "Excited to share our project from the NFT Creators Hackathon! We built a platform for dynamic NFTs that evolve based on real-world events. Check it out and let me know what you think!",
       likes: 42,
+      liked: false,
       comments: 15,
       timestamp: "1 day ago",
       hackathon: {
@@ -71,11 +64,59 @@ export default function CommunityFeed() {
       content:
         "Looking for feedback on our DAO governance dashboard design. We're trying to make complex voting mechanisms more accessible to non-technical users. Any suggestions?",
       likes: 18,
+      liked: false,
       comments: 7,
       timestamp: "3 days ago",
       projectImage: "/placeholder.svg?height=300&width=600",
     },
-  ]
+  ])
+
+  const handleSubmit = () => {
+    if (!newPost.trim()) return
+
+    setIsSubmitting(true)
+
+    // Create a new post object
+    const newPostObj = {
+      id: `post${Date.now()}`, // Generate a unique ID
+      user: {
+        id: "current-user", // In a real app, this would be the current user's ID
+        name: "You", // In a real app, this would be the current user's name
+        avatar: "/placeholder.svg?height=40&width=40",
+        role: "Web3 Enthusiast", // In a real app, this would be the current user's role
+      },
+      content: newPost,
+      likes: 0,
+      liked: false,
+      comments: 0,
+      timestamp: "Just now",
+      // Optional: add hackathon tag if selected
+    }
+
+    // Add the new post to the beginning of the posts array
+    setPosts([newPostObj, ...posts])
+
+    // Reset the form
+    setNewPost("")
+    setIsSubmitting(false)
+  }
+
+  const handleLike = (postId) => {
+    setPosts(
+      posts.map((post) => {
+        if (post.id === postId) {
+          // Toggle like status
+          const newLikedStatus = !post.liked
+          return {
+            ...post,
+            liked: newLikedStatus,
+            likes: newLikedStatus ? post.likes + 1 : post.likes - 1,
+          }
+        }
+        return post
+      }),
+    )
+  }
 
   return (
     <div className="space-y-6">
@@ -99,16 +140,16 @@ export default function CommunityFeed() {
         <CardFooter className="flex justify-between border-t pt-4">
           <div className="flex gap-2">
             <Button variant="ghost" size="sm" className="text-muted-foreground gap-2">
-              <Image className="h-4 w-4" />
+              <img src="/image.svg" className="h-4 w-4 " />
               Image
             </Button>
             <Button variant="ghost" size="sm" className="text-muted-foreground gap-2">
-              <Hash className="h-4 w-4" />
+              <img src="/hash.svg" className="h-4 w-4" />
               Hackathon
             </Button>
           </div>
           <Button onClick={handleSubmit} disabled={isSubmitting || !newPost.trim()} className="gap-2">
-            <Send className="h-4 w-4" />
+            <img src="/send.svg" className="h-4 w-4" />
             Post
           </Button>
         </CardFooter>
@@ -153,16 +194,21 @@ export default function CommunityFeed() {
             )}
 
             <div className="flex items-center gap-4">
-              <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
-                <img src="/heart.svg" className="h-4 w-4" />
+              <Button
+                variant="ghost"
+                size="sm"
+                className={`gap-1 ${post.liked ? "text-red-500" : "text-muted-foreground"}`}
+                onClick={() => handleLike(post.id)}
+              >
+                <img src={post.liked ? "/heart-filled.svg" : "/heart.svg"} className="h-4 w-4" alt="Like" />
                 <span>{post.likes}</span>
               </Button>
               <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
-                <img src="/message.square.svg" className="h-4 w-4" />
+                <img src="/messagesquare.svg" className="h-4 w-4" />
                 <span>{post.comments}</span>
               </Button>
               <Button variant="ghost" size="sm" className="gap-1 text-muted-foreground">
-                <Share2 className="h-4 w-4" />
+                <img src="/share2.svg" className="h-4 w-4" />
                 Share
               </Button>
             </div>
