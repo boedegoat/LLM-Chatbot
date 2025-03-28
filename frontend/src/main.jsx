@@ -19,6 +19,8 @@ import CreateHackathonPage from './CreateHackathon'
 import ProfilePage from './profile'
 import Footer from './Footer'
 import Navbar from './Navbar'
+import TeamsPage from './Teams'
+import TeamDetails from './TeamDetails'
 
 const App = () => {
 	const { currentPage } = useRouter()
@@ -49,6 +51,10 @@ const App = () => {
 				return <CreateHackathonPage/>
 			case '/profile':
 				return <ProfilePage/>
+			case '/teams':
+				return <TeamsPage/>
+			case '/teams/team1':
+				return <TeamDetails/>
 			default:
 				return <NotFound />
 		}
