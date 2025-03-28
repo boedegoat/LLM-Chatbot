@@ -13,6 +13,7 @@ import LogOut from "/logout.svg"
 import { useRouter } from "./Router"
 import { useBackend } from './Backend'
 
+
 const user = {
   name : "Sandi",
   avatar : " "
@@ -36,7 +37,7 @@ export default function Navbar() {
 
   const navItems = [
     { name: "Explore", href: "/explore" },
-    { name: "Tools", href: "/tools" },
+    { name: "Tools", href: "/Tools" },
     { name: "Community", href: "/community" },
   ]
 
@@ -120,7 +121,7 @@ export default function Navbar() {
               <div className="pt-2 border-t">
                 <p className="px-2 text-xs font-medium text-muted-foreground mb-2">Resources</p>
                 <Link
-                  href="/resources/ai-tools"
+                  href="/Tools"
                   className="flex items-center gap-2 p-2 text-sm rounded-md hover:bg-muted"
                 >
                   <Code className="h-4 w-4" />

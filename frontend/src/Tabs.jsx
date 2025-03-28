@@ -1,11 +1,10 @@
 import * as React from "react"
 import { cn } from "./utils"
 
-
 const TabsContext = React.createContext({
-    value: "",
-    onValueChange: () => {},
-  });
+  value: "",
+  onValueChange: () => {},
+})
 
 export function Tabs({ defaultValue, value, onValueChange, children, ...props }) {
   const [tabValue, setTabValue] = React.useState(value || defaultValue || "")
@@ -18,7 +17,6 @@ export function Tabs({ defaultValue, value, onValueChange, children, ...props })
     [onValueChange],
   )
 
-  // Update internal state when controlled value changes
   React.useEffect(() => {
     if (value !== undefined && value !== tabValue) {
       setTabValue(value)

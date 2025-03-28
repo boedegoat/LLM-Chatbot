@@ -8,6 +8,11 @@ import NotFound from './NotFound'
 import Home from './Home'
 import Explore from './Explore'
 import AI from './AI'
+import ToolsPage from './Tools'
+import IdeaGeneratorPage from './Idea-generator'
+import TeamFinderPage from './Team-finder'
+import CodeTemplatesPage from './Code-Templates'
+import WalletManagerPage from './Create-Wallet'
 import HackathonPage from './HackathonPage'
 
 const App = () => {
@@ -21,8 +26,18 @@ const App = () => {
 				return <AI />
 			case '/explore':
 				return <Explore />
-			case '/explore/1':
+      case '/explore/1':
 				return <HackathonPage/>
+			case '/tools':
+				return <ToolsPage/>
+			case '/idea-generator':
+				return <IdeaGeneratorPage/>
+			case '/team-finder':
+				return <TeamFinderPage/>
+			case '/code-templates':
+				return <CodeTemplatesPage/>
+			case '/create-wallet':
+				return <WalletManagerPage/>
 			default:
 				return <NotFound />
 		}

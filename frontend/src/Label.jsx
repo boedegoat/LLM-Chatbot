@@ -1,7 +1,6 @@
 import * as React from "react"
 import { cn } from "./utils"
 
-
 const Label = React.forwardRef(({ className, ...props }, ref) => {
   return (
     <label
