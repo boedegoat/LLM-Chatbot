@@ -20,7 +20,7 @@ export default function ToolsPage() {
 							<CardHeader className='pb-2'>
 								<div className='flex items-center gap-2'>
 									<div className='p-2 rounded-md bg-blue-50 text-blue-600'>
-										<img src={'/lightbulb.svg'} alt='Idea Generator' className='h-5 w-5' />
+										<img src={'/lightbulb-black.svg'} alt='Idea Generator' className='h-5 w-5' />
 									</div>
 									<CardTitle className='text-xl'>AI Idea Generator</CardTitle>
 								</div>
@@ -32,30 +32,6 @@ export default function ToolsPage() {
 							</CardContent>
 							<CardFooter className='bg-slate-50 border-t'>
 								<Link href='/idea-generator' className='w-full'>
-									<Button variant='ghost' className='w-full justify-start'>
-										Explore Tool
-									</Button>
-								</Link>
-							</CardFooter>
-						</Card>
-
-						{/* Team Finder Card */}
-						<Card className='overflow-hidden'>
-							<CardHeader className='pb-2'>
-								<div className='flex items-center gap-2'>
-									<div className='p-2 rounded-md bg-blue-50 text-blue-600'>
-										<img src={'/users.svg'} alt='Team Finder' className='h-5 w-5' />
-									</div>
-									<CardTitle className='text-xl'>Team Finder</CardTitle>
-								</div>
-							</CardHeader>
-							<CardContent>
-								<CardDescription className='text-sm'>
-									Find team members with complementary skills for your hackathon project.
-								</CardDescription>
-							</CardContent>
-							<CardFooter className='bg-slate-50 border-t'>
-								<Link href='/team-finder' className='w-full'>
 									<Button variant='ghost' className='w-full justify-start'>
 										Explore Tool
 									</Button>
@@ -79,7 +55,7 @@ export default function ToolsPage() {
 								</CardDescription>
 							</CardContent>
 							<CardFooter className='bg-slate-50 border-t'>
-								<Link href='/code-Templates' className='w-full'>
+								<Link href='/code-templates' className='w-full'>
 									<Button variant='ghost' className='w-full justify-start'>
 										Explore Tool
 									</Button>

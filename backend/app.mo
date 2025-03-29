@@ -89,6 +89,10 @@ actor Hacktrilize {
     return Team.joinTeam(users, msg.caller, teams, teamId);
   };
 
+  public func getTeams() : async Result.Result<[Types.Team], Text> {
+    return Team.getTeams(teams);
+  };
+
   public shared (msg) func approveMember(teamId : Text, targetUserId : Principal) : async Result.Result<Text, Text> {
     return Team.approveMember(users, msg.caller, teams, teamId, targetUserId);
   };

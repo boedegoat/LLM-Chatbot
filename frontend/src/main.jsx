@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import RouterProvider, { useRouter } from './Router'
-import BackendProvider, { useBackend } from './Backend'
+import BackendProvider from './Backend'
 import '/index.css'
 
 import NotFound from './NotFound'
@@ -10,7 +10,6 @@ import Explore from './Explore'
 import AI from './AI'
 import ToolsPage from './Tools'
 import IdeaGeneratorPage from './Idea-generator'
-import TeamFinderPage from './Team-finder'
 import CodeTemplatesPage from './Code-Templates'
 import WalletManagerPage from './Create-Wallet'
 import CommunityPage from './Community'
@@ -39,8 +38,6 @@ const App = () => {
 				return <ToolsPage />
 			case '/idea-generator':
 				return <IdeaGeneratorPage />
-			case '/team-finder':
-				return <TeamFinderPage />
 			case '/code-templates':
 				return <CodeTemplatesPage />
 			case '/create-wallet':
@@ -50,16 +47,26 @@ const App = () => {
 			case '/create':
 				return <CreateHackathonPage />
 			case '/profile':
-				return <ProfilePage/>
+				return <ProfilePage />
 			case '/teams':
-				return <TeamsPage/>
+				return <TeamsPage />
 			case '/teams/team1':
-				return <TeamDetails/>
+				return <TeamDetails />
 		}
 
 		if (matchPattern('/explore/:hackathonId')) {
 			const params = getParams('/explore/:hackathonId')
 			return <HackathonPage hackathonId={params.hackathonId} />
+		}
+
+		if (matchPattern('/teams/:teamId')) {
+			const params = getParams('/teams/:teamId')
+			return <TeamDetails teamId={params.teamId} />
+		}
+
+		if (matchPattern('/profile/:username')) {
+			const params = getParams('/profile/:username')
+			return <ProfilePage username={params.username} />
 		}
 
 		return <NotFound />

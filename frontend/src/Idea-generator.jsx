@@ -1,7 +1,6 @@
 import { Button } from './Button'
 import { Card, CardContent, CardHeader, CardTitle } from './Card'
 import { Textarea } from './Text-Area'
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from './Select'
 import { Label } from './Label'
 import { useState } from 'react'
 import { useBackend } from './Backend'
@@ -182,22 +181,6 @@ export default function IdeaGeneratorPage() {
 						</CardHeader>
 						<CardContent className='space-y-4'>
 							<div className='space-y-2'>
-								<Label htmlFor='hackathon'>Select Hackathon</Label>
-								<Select value={hackathon} onValueChange={setHackathon}>
-									<SelectTrigger>
-										<SelectValue placeholder='Select a hackathon' />
-									</SelectTrigger>
-									<SelectContent>
-										{hackathons.map((h) => (
-											<SelectItem key={h.id} value={h.id}>
-												{h.name}
-											</SelectItem>
-										))}
-									</SelectContent>
-								</Select>
-							</div>
-
-							<div className='space-y-2'>
 								<Label htmlFor='inspiration'>Your Inspiration</Label>
 								<Textarea
 									id='inspiration'
@@ -215,12 +198,12 @@ export default function IdeaGeneratorPage() {
 							>
 								{isGenerating ? (
 									<>
-										<img src='./loader2.svg' className='h-4 w-4 mr-2 animate-spin' />
+										<img src='/loader2.svg' className='h-4 w-4 mr-2 animate-spin' />
 										Generating Ideas...
 									</>
 								) : (
 									<>
-										<img src='./lightbulb.svg' className='h-4 w-4 mr-2' />
+										<img src='/lightbulb.svg' className='h-4 w-4 mr-2' />
 										Generate Ideas
 									</>
 								)}
@@ -236,7 +219,7 @@ export default function IdeaGeneratorPage() {
 									<CardContent className='p-6 pt-6'>
 										<div className='flex items-start gap-3'>
 											<div className='p-2 rounded-full bg-yellow-50 text-yellow-600'>
-												<img src='./lightbulb-black.svg' className='h-5 w-5' />
+												<img src='/lightbulb-black.svg' className='h-5 w-5' />
 											</div>
 											<div className='flex-1'>
 												<div

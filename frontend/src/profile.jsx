@@ -6,23 +6,59 @@ import { useEffect, useState } from 'react'
 import { Label } from './Label'
 import Input from './Input'
 import { Textarea } from './Text-Area'
+import Link from './Link'
+import Loading from './Loading'
+import { getAvatar } from './utils'
 
-export default function ProfilePage() {
-	const { logout, user, actor } = useBackend()
+export default function ProfilePage(params) {
+	const { logout, user: myUser, actor } = useBackend()
 	const [isModalOpen, setIsModalOpen] = useState(false)
 	const [formData, setFormData] = useState({
 		username: '',
 		bio: '',
 	})
 	const [isSubmitting, setIsSubmitting] = useState(false)
+	const [loading, setLoading] = useState(false)
+	const [userDetail, setUserDetail] = useState(null)
 
 	useEffect(() => {
-		if (!user) return
+		if (!actor) return
+		if (params.username) {
+			getUserByUsername()
+		}
+	}, [params.username, actor])
+
+	useEffect(() => {
+		if (!myUser) return
 		setFormData({
-			username: user.username,
-			bio: user.bio || '',
+			username: myUser.username,
+			bio: myUser.bio || '',
 		})
-	}, [user])
+	}, [myUser])
+
+	const getUserByUsername = async () => {
+		setLoading(true)
+
+		const res = await actor.getUserByUsername(params.username)
+
+		if (res.err) {
+			alert(res.err)
+			setLoading(false)
+			return
+		}
+
+		const user = res.ok
+		user.avatar = getAvatar(user.username)
+		user.teams = await Promise.all(
+			user.teams.map(async (team) => {
+				const teamRes = await actor.getTeamDetail(team)
+				return teamRes.ok
+			})
+		)
+
+		setUserDetail(user)
+		setLoading(false)
+	}
 
 	const handleInputChange = (e) => {
 		const { name, value } = e.target
@@ -52,6 +88,12 @@ export default function ProfilePage() {
 		}
 	}
 
+	const user = userDetail || myUser
+
+	if (loading) {
+		return <Loading />
+	}
+
 	return (
 		<div className='container mx-auto py-12'>
 			<div className='max-w-4xl mx-auto'>
@@ -63,23 +105,27 @@ export default function ProfilePage() {
 							<div className='flex-1'>
 								<div className='flex gap-2 items-start mb-2'>
 									<h1 className='text-2xl font-semibold'>{user?.username}</h1>
-									<Button
-										onClick={() => setIsModalOpen(true)}
-										variant='outline'
-										size='sm'
-										className='flex items-center gap-1 ml-auto'
-									>
-										<img src='/square-pen.svg' alt='edit' className='h-3 w-3' />
-										Edit Profile
-									</Button>
-									<Button
-										onClick={() => logout()}
-										variant='destructive'
-										size='sm'
-										className='flex items-center gap-1'
-									>
-										Logout
-									</Button>
+									{!params.username && (
+										<>
+											<Button
+												onClick={() => setIsModalOpen(true)}
+												variant='outline'
+												size='sm'
+												className='flex items-center gap-1 ml-auto'
+											>
+												<img src='/square-pen.svg' alt='edit' className='h-3 w-3' />
+												Edit Profile
+											</Button>
+											<Button
+												onClick={() => logout()}
+												variant='destructive'
+												size='sm'
+												className='flex items-center gap-1'
+											>
+												Logout
+											</Button>
+										</>
+									)}
 								</div>
 
 								<p className='text-muted-foreground mb-4'>{user?.bio}</p>
@@ -113,36 +159,11 @@ export default function ProfilePage() {
 					</CardContent>
 				</Card>
 
-				<Tabs defaultValue='posts'>
+				<Tabs defaultValue='teams'>
 					<TabsList className='mb-6'>
-						<TabsTrigger value='posts'>Posts</TabsTrigger>
 						<TabsTrigger value='teams'>Teams</TabsTrigger>
 						<TabsTrigger value='wallet'>Wallet</TabsTrigger>
 					</TabsList>
-
-					<TabsContent value='posts'>
-						{user?.posts.length > 0 ? (
-							<div className='space-y-4'>
-								{user?.posts.map((post) => (
-									<Card key={post.id}>
-										<CardContent className='p-6'>
-											<p className='mb-4'>{post.content}</p>
-											<div className='flex items-center gap-4 text-sm text-muted-foreground'>
-												<span>{post.likes} likes</span>
-												<span>{post.comments} comments</span>
-												<span>{post.timestamp}</span>
-											</div>
-										</CardContent>
-									</Card>
-								))}
-							</div>
-						) : (
-							<div className='text-center py-12 bg-slate-50 rounded-md'>
-								<p className='text-muted-foreground mb-4'>You haven&apos;t created any posts yet.</p>
-								<Button>Create your first post</Button>
-							</div>
-						)}
-					</TabsContent>
 
 					<TabsContent value='teams'>
 						{user?.teams.length > 0 ? (
@@ -152,12 +173,11 @@ export default function ProfilePage() {
 										<CardContent className='p-6'>
 											<h3 className='text-xl font-semibold mb-2'>{team.name}</h3>
 											<div className='flex items-center gap-4 text-sm text-muted-foreground'>
-												<span>Hackathon: {team.hackathon}</span>
-												<span>{team.members} members</span>
+												<span>{team.members.length} members</span>
 											</div>
 											<div className='mt-4'>
-												<Button variant='outline' size='sm'>
-													View Team
+												<Button asChild variant='outline' size='sm'>
+													<Link href={`/teams/${team.id}`}>View Team</Link>
 												</Button>
 											</div>
 										</CardContent>

@@ -2,9 +2,7 @@ import React, { useState, useEffect, createContext, useContext } from 'react'
 
 const RouterContext = createContext({})
 
-// Helper function to match route patterns and extract params
 const matchRoute = (pattern, path) => {
-	// Convert route pattern to regex
 	const paramNames = []
 	const regexPattern = pattern
 		.replace(/:[^\/]+/g, (match) => {
@@ -18,7 +16,6 @@ const matchRoute = (pattern, path) => {
 
 	if (!match) return null
 
-	// Extract params into an object
 	const params = {}
 	match.slice(1).forEach((value, index) => {
 		params[paramNames[index]] = value
@@ -28,37 +25,75 @@ const matchRoute = (pattern, path) => {
 }
 
 const RouterProvider = ({ children }) => {
+	const getPathWithoutQuery = (url) => {
+		return url.split('?')[0]
+	}
+
 	const [currentPage, setCurrentPage] = useState(() => {
-		const path = window.location.pathname
+		const path = getPathWithoutQuery(window.location.pathname)
 		return path
 	})
 
+	const [queryParams, setQueryParams] = useState(() => {
+		const searchParams = new URLSearchParams(window.location.search)
+		return Object.fromEntries(searchParams.entries())
+	})
+
 	const navigate = (page) => {
+		const [path, queryString] = page.split('?')
+
 		window.history.pushState({}, '', page)
-		setCurrentPage(page)
+
+		setCurrentPage(path)
+
+		if (queryString) {
+			const searchParams = new URLSearchParams('?' + queryString)
+			setQueryParams(Object.fromEntries(searchParams.entries()))
+		} else {
+			setQueryParams({})
+		}
 	}
 
-	// Function to check if current path matches a pattern
 	const matchPattern = (pattern) => {
 		return matchRoute(pattern, currentPage) !== null
 	}
 
-	// Function to get route params based on pattern
 	const getParams = (pattern) => {
 		return matchRoute(pattern, currentPage) || {}
 	}
 
+	const getQueryParam = (key) => {
+		return queryParams[key]
+	}
+
+	const getAllQueryParams = () => {
+		return queryParams
+	}
+
 	useEffect(() => {
 		const handlePopState = () => {
-			const path = window.location.pathname
+			const path = getPathWithoutQuery(window.location.pathname)
 			setCurrentPage(path)
+
+			const searchParams = new URLSearchParams(window.location.search)
+			setQueryParams(Object.fromEntries(searchParams.entries()))
 		}
 		window.addEventListener('popstate', handlePopState)
 		return () => window.removeEventListener('popstate', handlePopState)
 	}, [])
 
 	return (
-		<RouterContext.Provider value={{ currentPage, navigate, matchPattern, getParams }}>
+		<RouterContext.Provider
+			value={{
+				currentPage,
+				navigate,
+				matchPattern,
+				getParams,
+				getQueryParam,
+				getAllQueryParams,
+				queryParams,
+			}}
+		>
 			{children}
 		</RouterContext.Provider>
 	)

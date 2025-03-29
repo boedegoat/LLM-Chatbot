@@ -4,6 +4,9 @@ import Result "mo:base/Result";
 import Time "mo:base/Time";
 import Array "mo:base/Array";
 import Text "mo:base/Text";
+import Buffer "mo:base/Buffer";
+import Order "mo:base/Order";
+import Int "mo:base/Int";
 import Utils "Utils";
 
 module Team {
@@ -45,7 +48,7 @@ module Team {
                             updatedAt = ?Time.now();
                         };
 
-                        hackathons.put(id, updatedHackathon);
+                        hackathons.put(hackathon.id, updatedHackathon);
 
                         let updatedUser : Types.User = {
                             user with
@@ -149,5 +152,22 @@ module Team {
             case (null) { return #err("Team not found") };
             case (?team) { return #ok(team) };
         };
+    };
+
+    public func getTeams(
+        teams : Types.Teams
+    ) : Result.Result<[Types.Team], Text> {
+
+        let array = Buffer.Buffer<Types.Team>(0);
+        for (team in teams.vals()) {
+            array.add(team);
+        };
+        let sorted = Array.sort(
+            Buffer.toArray(array),
+            func(a : Types.Team, b : Types.Team) : Order.Order {
+                Int.compare(b.createdAt, a.createdAt);
+            },
+        );
+        return #ok(sorted);
     };
 };

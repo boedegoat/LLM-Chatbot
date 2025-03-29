@@ -70,6 +70,13 @@ const BackendProvider = ({ children }) => {
 		}
 
 		user.avatar = getAvatar(user.username)
+		user.teams = await Promise.all(
+			user.teams.map(async (team) => {
+				const teamRes = await actor.getTeamDetail(team)
+				return teamRes.ok
+			})
+		)
+		console.log(user)
 
 		setUser(user)
 

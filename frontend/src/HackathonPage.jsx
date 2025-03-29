@@ -3,11 +3,11 @@ import { Badge } from './Badge'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from './Tabs'
 import { Card, CardContent, CardHeader, CardTitle } from './Card'
 import TeamSection from './Team-section'
-import IdeaGenerator from './Idea-generator'
 import { useBackend } from './Backend'
 import { useEffect, useState } from 'react'
 import { getAvatar } from './utils'
 import Loading from './Loading'
+import Link from './Link'
 
 const dummyHackathon = {
 	website: 'https://example.com',
@@ -55,6 +55,12 @@ export default function HackathonPage({ hackathonId }) {
 		const userRes = await actor.getUserById(hackathon.createdBy)
 
 		hackathon.createdByUser = userRes.ok
+		hackathon.teams = await Promise.all(
+			hackathon.teams.map(async (team) => {
+				const teamRes = await actor.getTeamDetail(team)
+				return teamRes.ok
+			})
+		)
 		console.log(hackathon)
 
 		setHackathon(res.ok)
@@ -102,8 +108,8 @@ export default function HackathonPage({ hackathonId }) {
 						</div>
 
 						<div className='w-full md:w-auto flex flex-col gap-3 md:min-w-[200px]'>
-							<Button size='lg' className='w-full'>
-								Join Now
+							<Button asChild size='lg' className='w-full'>
+								<Link href={`/teams?hackathonId=${hackathon.id}`}>Join Now</Link>
 							</Button>
 							<Button variant='outline' size='lg' className='w-full gap-2'>
 								<img src='/bookmark.svg' alt='Bookmark' className='h-4 w-4' />
@@ -128,7 +134,6 @@ export default function HackathonPage({ hackathonId }) {
 									<TabsTrigger value='teams'>Teams</TabsTrigger>
 									<TabsTrigger value='projects'>Projects</TabsTrigger>
 									<TabsTrigger value='resources'>Resources</TabsTrigger>
-									<TabsTrigger value='generate'>Generate Idea</TabsTrigger>
 								</TabsList>
 
 								<TabsContent value='overview'>
@@ -197,7 +202,7 @@ export default function HackathonPage({ hackathonId }) {
 								</TabsContent>
 
 								<TabsContent value='teams'>
-									<TeamSection hackathonId={hackathonId} />
+									<TeamSection teams={hackathon.teams} hackathonId={hackathon.id} />
 								</TabsContent>
 
 								<TabsContent value='projects'>
@@ -252,7 +257,7 @@ export default function HackathonPage({ hackathonId }) {
 														<div className='flex items-start gap-4'>
 															<div className='rounded-full bg-purple-100 p-3'>
 																<img
-																	src='/lightbulb.svg'
+																	src='/lightbulb-black.svg'
 																	alt='Lightbulb'
 																	className='h-5 w-5 text-purple-600'
 																></img>
@@ -263,8 +268,8 @@ export default function HackathonPage({ hackathonId }) {
 																	Generate innovative project ideas based on hackathon
 																	themes using our AI assistant.
 																</p>
-																<Button variant='outline' size='sm'>
-																	Generate Ideas
+																<Button asChild variant='outline' size='sm'>
+																	<Link href='/idea-generator'>Generate Ideas</Link>
 																</Button>
 															</div>
 														</div>
@@ -324,14 +329,9 @@ export default function HackathonPage({ hackathonId }) {
 										</div>
 									</div>
 								</TabsContent>
-
-								<TabsContent value='generate'>
-									<IdeaGenerator hackathon={hackathon} />
-								</TabsContent>
 							</Tabs>
 						</div>
 
-						{/* Sidebar */}
 						<div className='w-full lg:w-80 flex-shrink-0'>
 							<div className='sticky top-24 space-y-6'>
 								<Card>
@@ -374,8 +374,10 @@ export default function HackathonPage({ hackathonId }) {
 											</div>
 										</div>
 										<div className='mt-4'>
-											<Button variant='outline' className='w-full'>
-												View Profile
+											<Button asChild variant='outline' className='w-full'>
+												<Link href={`/profile/${hackathon.createdByUser.username}`}>
+													View Profile
+												</Link>
 											</Button>
 										</div>
 									</CardContent>
