@@ -25,29 +25,24 @@ Modules:
 ## 🌟 Core Features
 ### 🔐 1. Authentication
 
-Secure login using ICP Internet Identity, enabling decentralized authentication and enhanced security.
-
-Users can manage their identity seamlessly across the platform without needing traditional usernames and passwords.
+- Secure login using ICP Internet Identity, enabling decentralized authentication and enhanced security.
+- Users can manage their identity seamlessly across the platform without needing traditional usernames and passwords.
 
 ### 🏡 2. Home Page
 
-Browse general hackathons happening worldwide.
-
-Introduction to Hacktrilize and its features.
-
-Testimonials from the community.
+- Browse general hackathons happening worldwide.
+- Introduction to Hacktrilize and its features.
+- Testimonials from the community.
 
 ### 🎯 3. Hackathon Management
 
-Create Hackathon: Organizers can set up their own hackathons with customized details.
-
-Explore Hackathons: Users can discover and join various hackathons, viewing detailed event information.
+- Create Hackathon: Organizers can set up their own hackathons with customized details.
+- Explore Hackathons: Users can discover and join various hackathons, viewing detailed event information.
 
 ### 📝 4. Profile Page
 
-View your created hackathons and posts.
-
-Manage your ICP-linked profile and track your participation history.
+- View your created hackathons and posts.
+- Manage your ICP-linked profile and track your participation history.
 
 ### 🛠️ 5. Tools
 
