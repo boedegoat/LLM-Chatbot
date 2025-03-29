@@ -1,7 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import RouterProvider, { useRouter } from './Router'
-import BackendProvider from './Backend'
+import BackendProvider, { useBackend } from './Backend'
 import '/index.css'
 
 import NotFound from './NotFound'
@@ -21,7 +21,7 @@ import Footer from './Footer'
 import Navbar from './Navbar'
 
 const App = () => {
-	const { currentPage } = useRouter()
+	const { currentPage, matchPattern, getParams } = useRouter()
 
 	const renderPage = () => {
 		switch (currentPage) {
@@ -42,16 +42,21 @@ const App = () => {
 			case '/code-templates':
 				return <CodeTemplatesPage />
 			case '/create-wallet':
-				return <WalletManagerPage/>
+				return <WalletManagerPage />
 			case '/community':
-				return <CommunityPage/>
+				return <CommunityPage />
 			case '/create':
-				return <CreateHackathonPage/>
+				return <CreateHackathonPage />
 			case '/profile':
-				return <ProfilePage/>
-			default:
-				return <NotFound />
+				return <ProfilePage />
 		}
+
+		if (matchPattern('/explore/:hackathonId')) {
+			const params = getParams('/explore/:hackathonId')
+			return <HackathonPage hackathonId={params.hackathonId} />
+		}
+
+		return <NotFound />
 	}
 
 	return (
@@ -66,11 +71,9 @@ const App = () => {
 export default App
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<React.StrictMode>
-		<RouterProvider>
-			<BackendProvider>
-				<App />
-			</BackendProvider>
-		</RouterProvider>
-	</React.StrictMode>
+	<RouterProvider>
+		<BackendProvider>
+			<App />
+		</BackendProvider>
+	</RouterProvider>
 )

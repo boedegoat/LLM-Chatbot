@@ -56,6 +56,15 @@ module User {
         };
     };
 
+    public func getUserByUsername(users : Types.Users, username : Text) : Result.Result<Types.User, Text> {
+        for ((id, user) in users.entries()) {
+            if (user.username == username) {
+                return #ok(user);
+            };
+        };
+        return #err("User not registered");
+    };
+
     public func editProfile(users : Types.Users, userId : Principal, data : Types.EditProfileData) : Result.Result<Types.User, Text> {
         switch (users.get(userId)) {
             case (null) {
