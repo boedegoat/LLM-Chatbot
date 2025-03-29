@@ -67,7 +67,7 @@ Modules:
 
 🌐 6. Community
 
-📢 User Feed: View and post updates related to hackathons.
+### 📢 User Feed: View and post updates related to hackathons.
 
 #### 🔎 Team Recruitment: Users can announce that they are looking for team members.
 
