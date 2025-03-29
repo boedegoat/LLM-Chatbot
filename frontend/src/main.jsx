@@ -19,6 +19,8 @@ import CreateHackathonPage from './CreateHackathon'
 import ProfilePage from './profile'
 import Footer from './Footer'
 import Navbar from './Navbar'
+import TeamsPage from './Teams'
+import TeamDetails from './TeamDetails'
 
 const App = () => {
 	const { currentPage, matchPattern, getParams } = useRouter()
@@ -48,7 +50,11 @@ const App = () => {
 			case '/create':
 				return <CreateHackathonPage />
 			case '/profile':
-				return <ProfilePage />
+				return <ProfilePage/>
+			case '/teams':
+				return <TeamsPage/>
+			case '/teams/team1':
+				return <TeamDetails/>
 		}
 
 		if (matchPattern('/explore/:hackathonId')) {
