@@ -1,4 +1,9 @@
 # 🚀 Hacktralize
+
+![Hacktralize Logo](./frontend/public/homepage.png)
+
+A decentralized, AI-powered hackathon platform built on the Internet Computer Protocol.
+
 Hacktralize is a decentralized, hackathon-themed platform designed to help users generate product ideas, explore and create hackathons, find teams, and manage project resources. With AI-powered idea generation and a suite of collaborative tools, Hacktrilize streamlines the hackathon experience for both organizers and participants while embracing decentralization for enhanced security and transparency.
 
 ## Overview
