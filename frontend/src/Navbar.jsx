@@ -2,16 +2,13 @@ import Link from './Link'
 import { Button } from './Button'
 import { useState, useEffect } from 'react'
 import { cn } from './utils'
-import { Avatar, AvatarFallback, AvatarImage } from './Avatar'
 import { useMediaQuery } from './use-mobile'
 import Zap from '/zap.svg'
 import { useRouter } from './Router'
 import { useBackend } from './Backend'
 
-let user = null
-
 export default function Navbar() {
-	const { login, logout, isAuthenticated, principal } = useBackend()
+	const { login, logout, user } = useBackend()
 	const { navigate } = useRouter()
 	const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
 	const pathname = location.pathname
@@ -26,8 +23,6 @@ export default function Navbar() {
 		{ name: 'Tools', href: '/tools' },
 		{ name: 'Community', href: '/community' },
 	]
-
-	console.log(isAuthenticated, principal)
 
 	return (
 		<header className='sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
@@ -85,12 +80,9 @@ export default function Navbar() {
 								navigate('/profile')
 							}}
 							variant='ghost'
-							className='relative h-8 w-8 rounded-full'
+							className='!p-0 rounded-full'
 						>
-							<Avatar className='h-8 w-8'>
-								<AvatarImage src={user.avatar} alt={user.name} />
-								<AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-							</Avatar>
+							<img src={user.avatar} alt={user.username} className='h-8 w-8 rounded-full' />
 						</Button>
 					) : (
 						<Button onClick={() => login()} className='gap-2'>
@@ -100,7 +92,6 @@ export default function Navbar() {
 				</div>
 			</div>
 
-			{/* Mobile Menu */}
 			{mobileMenuOpen && (
 				<div className='md:hidden border-t'>
 					<div className='container mx-auto px-4 py-4 space-y-4'>
@@ -129,11 +120,8 @@ export default function Navbar() {
 							{user ? (
 								<div className='flex items-center justify-between p-2 bg-muted rounded-md'>
 									<div className='flex items-center gap-2'>
-										<Avatar className='h-8 w-8'>
-											<AvatarImage src={user.avatar} alt={user.name} />
-											<AvatarFallback>{user.name.charAt(0)}</AvatarFallback>
-										</Avatar>
-										<span className='text-sm font-medium'>{user.name}</span>
+										<img src={user.avatar} alt={user.username} className='h-8 w-8' />
+										<span className='text-sm font-medium'>{user.username}</span>
 									</div>
 									<Button onClick={() => logout()} variant='ghost' size='sm'>
 										Log out

@@ -31,6 +31,7 @@ module Hackathon {
             totalPrizePool = data.totalPrizePool;
             maximumTeamSize = data.maximumTeamSize;
             teams = [];
+            createdBy = userId;
             createdAt = Time.now();
             updatedAt = null;
         };

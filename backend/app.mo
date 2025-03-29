@@ -49,6 +49,14 @@ actor Hacktrilize {
     return User.getUser(users, msg.caller);
   };
 
+  public func getUserByUsername(username : Text) : async Result.Result<Types.User, Text> {
+    return User.getUserByUsername(users, username);
+  };
+
+  public func getUserById(userId : Principal) : async Result.Result<Types.User, Text> {
+    return User.getUser(users, userId);
+  };
+
   public shared (msg) func register(username : Text) : async Result.Result<Types.User, Text> {
     return User.register(users, msg.caller, username);
   };

@@ -2,6 +2,10 @@ export function cn(...classes) {
 	return classes.filter(Boolean).join(' ')
 }
 
+export function getAvatar(username) {
+	return `https://api.dicebear.com/9.x/fun-emoji/svg?seed=${username}`
+}
+
 export function parseMarkdown(markdown) {
 	// Handle code blocks and store content with placeholders
 	const codeBlocks = []

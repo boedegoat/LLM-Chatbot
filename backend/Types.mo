@@ -32,6 +32,7 @@ module Types {
         totalPrizePool : Nat;
         maximumTeamSize : Nat;
         teams : [Text];
+        createdBy : Principal;
         createdAt : Int;
         updatedAt : ?Int;
     };

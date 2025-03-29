@@ -3,6 +3,7 @@ import Link from './Link'
 import { Badge } from './Badge'
 import { Card, CardContent } from './Card'
 import FeaturedHackathons from './FeaturedHackathons'
+import { getAvatar } from './utils'
 
 export default function Home() {
 	return (
@@ -101,7 +102,7 @@ export default function Home() {
 						<Card className='bg-background border-purple-100'>
 							<CardContent className='pt-6'>
 								<div className='rounded-full bg-purple-100 w-12 h-12 flex items-center justify-center mb-4'>
-									<img src='/lightbulb.svg' className='h-6 w-6 text-purple-600' />
+									<img src='/lightbulb-black.svg' className='h-6 w-6 text-purple-600' />
 								</div>
 								<h3 className='text-xl font-semibold mb-2'>AI-Powered Idea Generation</h3>
 								<p className='text-muted-foreground'>
@@ -225,7 +226,9 @@ export default function Home() {
 						<Card>
 							<CardContent className='pt-6'>
 								<div className='flex items-start gap-4 mb-4'>
-									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'></div>
+									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'>
+										<img src={getAvatar('Alex Johnson')} className='w-full h-full rounded-full' />
+									</div>
 									<div>
 										<p className='font-semibold'>Alex Johnson</p>
 										<p className='text-sm text-muted-foreground'>Web3 Developer</p>
@@ -241,7 +244,9 @@ export default function Home() {
 						<Card>
 							<CardContent className='pt-6'>
 								<div className='flex items-start gap-4 mb-4'>
-									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'></div>
+									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'>
+										<img src={getAvatar('Sarah Chen')} className='w-full h-full rounded-full' />
+									</div>
 									<div>
 										<p className='font-semibold'>Sarah Chen</p>
 										<p className='text-sm text-muted-foreground'>Hackathon Organizer</p>
@@ -257,7 +262,9 @@ export default function Home() {
 						<Card>
 							<CardContent className='pt-6'>
 								<div className='flex items-start gap-4 mb-4'>
-									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'></div>
+									<div className='rounded-full bg-purple-100 w-10 h-10 flex-shrink-0'>
+										<img src={getAvatar('Michael Torres')} className='w-full h-full rounded-full' />
+									</div>
 									<div>
 										<p className='font-semibold'>Michael Torres</p>
 										<p className='text-sm text-muted-foreground'>UI/UX Designer</p>
