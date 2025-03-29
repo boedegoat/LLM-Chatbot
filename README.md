@@ -53,18 +53,6 @@ Modules:
 
 #### 🤖 AI Idea Generator: Generate hackathon project ideas using AI, with a built-in rating system.
 
-#### 👥 Team Finder: Connect with teams looking for members for upcoming hackathons.
-
-#### 📜 Code Template Library: Access general coding templates to accelerate project development.
-
-#### 💳 Team Wallet Manager: Manage your team’s wallet for hackathons, including:
-
-- Wallet overview
-- Member management
-- Transaction history
-- Fund withdrawal
-- ICP-based transactions for secure and decentralized financial management.
-
 ### 🌐 6. Community
 
 #### 📢 User Feed: View and post updates related to hackathons.
@@ -85,6 +73,25 @@ Hackathons are fast-paced events that require rapid ideation, team formation, an
 - Utilizing ICP blockchain for seamless and decentralized transactions.
 - Building a community-driven space for collaboration and knowledge sharing.
 - With Hacktrilize, hackathon participants and organizers can focus on what truly matters: creating and innovating. 🚀
+
+## 🔮 Future Plans
+To further enhance the Hacktralize platform, we plan to introduce the following features:​
+
+### 📜 Code Template Library: An AI-powered code generator, inspired by platforms like v0.dev, to provide users with customizable code templates for accelerating project development.​
+
+### 🔒 AI Security Auditing: Implement AI-driven security audits to ensure the integrity and safety of projects developed during hackathons.​
+
+### 💳 Team Wallet Manager: A comprehensive tool for managing team finances, including:​
+
+- Wallet Overview:​
+
+- Member Management:​
+
+- Transaction History:​
+
+- Fund Withdrawal:​
+
+- ICP-Based Transactions: Ensuring secure and decentralized financial management.
 
 ## 🤝 How to Contribute
 1. Fork the repository
