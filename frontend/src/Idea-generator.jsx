@@ -73,7 +73,6 @@ Market Fit: High (Could def attract grants & users post-hackathon)
 export default function IdeaGeneratorPage() {
 	const { actor } = useBackend()
 	const [chat, setChat] = useState([])
-	const [hackathon, setHackathon] = useState('')
 	const [inspiration, setInspiration] = useState('')
 	const [isGenerating, setIsGenerating] = useState(false)
 	const [message, setMessage] = useState('')
@@ -84,7 +83,7 @@ export default function IdeaGeneratorPage() {
 	]
 
 	const generateIdeas = async () => {
-		if (!hackathon || !inspiration.trim()) return
+		if (!inspiration.trim()) return
 
 		setIsGenerating(true)
 
@@ -193,7 +192,7 @@ export default function IdeaGeneratorPage() {
 
 							<Button
 								onClick={generateIdeas}
-								disabled={isGenerating || !hackathon || !inspiration.trim()}
+								disabled={isGenerating || !inspiration.trim()}
 								className='w-full'
 							>
 								{isGenerating ? (
